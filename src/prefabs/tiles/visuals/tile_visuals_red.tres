@@ -1,0 +1,8 @@
+[gd_resource type="Resource" script_class="InteractiveTileVisuals" format=3 uid="uid://ck3n4rrghl0ql"]
+
+[ext_resource type="Script" uid="uid://dpg0665var07n" path="res://prefabs/tiles/tile_visuals.gd" id="1_4i8s0"]
+
+[resource]
+script = ExtResource("1_4i8s0")
+tint = Color(1, 0, 0, 1)
+metadata/_custom_type_script = "uid://dpg0665var07n"

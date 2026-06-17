@@ -1,0 +1,126 @@
+[gd_scene format=3 uid="uid://b5arqm7g5oln"]
+
+[ext_resource type="Script" uid="uid://w1etlsb1kt1a" path="res://prefabs/tiles/tile.gd" id="1_epybn"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_0sacf"]
+albedo_color = Color(1.1, 1.1, 1.1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_epybn"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_i3kqv"]
+material = SubResource("StandardMaterial3D_epybn")
+size = Vector3(2, 0.2, 2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_i3kqv"]
+size = Vector3(2, 0.2, 2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_epybn"]
+size = Vector3(2, 0.25, 2)
+
+[sub_resource type="Animation" id="Animation_i3kqv"]
+resource_name = "PRESS"
+length = 0.75
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Offset/Tile:position:y")
+tracks/0/interp = 2
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.46666667, 0.73333335),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -0.13, -0.08, -0.1]
+}
+
+[sub_resource type="Animation" id="Animation_0sacf"]
+resource_name = "RELEASE"
+length = 0.75
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Offset/Tile:position:y")
+tracks/0/interp = 2
+tracks/0/loop_wrap = false
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.19999999, 0.56666666, 0.75),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [-0.1, 0.02, -0.03, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_epybn"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Offset/Tile:position:y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_epybn"]
+_data = {
+&"PRESS": SubResource("Animation_i3kqv"),
+&"RELEASE": SubResource("Animation_0sacf"),
+&"RESET": SubResource("Animation_epybn")
+}
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_i3kqv"]
+shading_mode = 0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_epybn"]
+material = SubResource("StandardMaterial3D_i3kqv")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_i3kqv"]
+size = Vector2(4, 4)
+
+[node name="Tile" type="Node3D" unique_id=495016397]
+script = ExtResource("1_epybn")
+
+[node name="Offset" type="Node3D" parent="." unique_id=1712474833]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0)
+
+[node name="Tile" type="StaticBody3D" parent="Offset" unique_id=533375619]
+unique_name_in_owner = true
+collision_layer = 4
+collision_mask = 8
+
+[node name="Mesh" type="MeshInstance3D" parent="Offset/Tile" unique_id=1375770093]
+unique_name_in_owner = true
+material_override = SubResource("StandardMaterial3D_0sacf")
+mesh = SubResource("BoxMesh_i3kqv")
+
+[node name="Collider" type="CollisionShape3D" parent="Offset/Tile" unique_id=1901011966]
+unique_name_in_owner = true
+shape = SubResource("BoxShape3D_i3kqv")
+
+[node name="Trigger" type="Area3D" parent="." unique_id=1970287977]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.125, 0)
+collision_layer = 0
+collision_mask = 10
+monitorable = false
+
+[node name="Collider" type="CollisionShape3D" parent="Trigger" unique_id=1468037238]
+shape = SubResource("BoxShape3D_epybn")
+
+[node name="Animator" type="AnimationPlayer" parent="." unique_id=492398951]
+unique_name_in_owner = true
+libraries/ = SubResource("AnimationLibrary_epybn")
+
+[node name="Frame" type="MeshInstance3D" parent="." unique_id=132005391]
+visible = false
+mesh = SubResource("PlaneMesh_epybn")
+
+[node name="Ground" type="MeshInstance3D" parent="." unique_id=2004399561]
+visible = false
+mesh = SubResource("PlaneMesh_i3kqv")
+
+[connection signal="body_entered" from="Trigger" to="." method="_on_trigger_body_entered"]
+[connection signal="body_exited" from="Trigger" to="." method="_on_trigger_body_exited"]

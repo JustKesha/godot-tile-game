@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="InteractiveTileBehaviourTrampoline" format=3 uid="uid://c5bpai7qwvvmu"]
+
+[ext_resource type="Script" uid="uid://cferqn17x8tfh" path="res://prefabs/tiles/behaviours/tile_behaviour_trampoline.gd" id="1_mpu7p"]
+
+[resource]
+script = ExtResource("1_mpu7p")
+metadata/_custom_type_script = "uid://cferqn17x8tfh"
