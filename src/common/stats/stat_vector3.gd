@@ -5,15 +5,28 @@ extends Resource
 ##
 ## Synchronizes three independent numeric stats along the X, Y, and Z axes.
 ## Designed to compile composite spatial parameters (like velocity or scale) 
-## using an isolated, multi-layered modification stack.
+## using an isolated, multi-layered modification stack. Unassigned coordinate
+## axes automatically fall back to a default [Stat] instance upon first access.
 
 @export_category("Dimensions")
 ## The internal [Stat] tracking calculations for the horizontal X axis.
-@export var x: Stat = Stat.new()
+## Self-assigns a fresh [Stat] instance if [code]null[/code] on access.
+@export var x: Stat:
+	get():
+		if not x: x = Stat.new()
+		return x
 ## The internal [Stat] tracking calculations for the vertical Y axis.
-@export var y: Stat = Stat.new()
+## Self-assigns a fresh [Stat] instance if [code]null[/code] on access.
+@export var y: Stat:
+	get():
+		if not y: y = Stat.new()
+		return y
 ## The internal [Stat] tracking calculations for the depth Z axis.
-@export var z: Stat = Stat.new()
+## Self-assigns a fresh [Stat] instance if [code]null[/code] on access.
+@export var z: Stat:
+	get():
+		if not z: z = Stat.new()
+		return z
 
 ## The raw numeric baseline vectors across all coordinates before modifiers are processed.
 var base_value: Vector3:
@@ -27,6 +40,12 @@ var base_value: Vector3:
 var current_value: Vector3:
 	get():
 		return Vector3(x.current_value, y.current_value, z.current_value)
+
+
+func _init(p_x: Stat = null, p_y: Stat = null, p_z: Stat = null):
+	x = p_x
+	y = p_y
+	z = p_z
 
 
 ## Sequentially routes isolated coordinate [StatModifier] capsules to their target axes.
