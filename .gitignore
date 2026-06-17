@@ -1,6 +1,6 @@
 # Custom
 assets/
-builds/
+build/
 *.tmp
 *.rar
 
