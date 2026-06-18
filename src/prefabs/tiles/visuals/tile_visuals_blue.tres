@@ -5,4 +5,8 @@
 [resource]
 script = ExtResource("1_2dj4f")
 tint = Color(0, 0, 1, 1)
+brightness = Dictionary[int, float]({
+0: 1.1,
+1: 1.5
+})
 metadata/_custom_type_script = "uid://dpg0665var07n"

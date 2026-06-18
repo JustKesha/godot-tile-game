@@ -1,0 +1,7 @@
+[gd_resource type="Resource" script_class="InteractiveTileVisuals" format=3 uid="uid://blagnb7plmxp5"]
+
+[ext_resource type="Script" uid="uid://dpg0665var07n" path="res://prefabs/tiles/tile_visuals.gd" id="1_bqd5w"]
+
+[resource]
+script = ExtResource("1_bqd5w")
+metadata/_custom_type_script = "uid://dpg0665var07n"

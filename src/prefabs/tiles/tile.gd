@@ -12,6 +12,8 @@ enum State {
 	ACTIVE,
 	}
 
+const DEFAULT_VISUALS: InteractiveTileVisuals = preload("uid://blagnb7plmxp5")
+
 @export var visuals: InteractiveTileVisuals:
 	set(value):
 		if visuals is InteractiveTileVisuals:
@@ -47,9 +49,11 @@ func _ready():
 
 
 func _on_trigger_body_entered(body_entered: Node3D):
-	var mod := StatModifier.new()
-	mod.id = str(body_entered.get_instance_id())
-	weight_applied.add_modifier(mod)
+	weight_applied.add_modifier(
+		StatModifier.new(
+			str(body_entered.get_instance_id()),
+			)
+	)
 
 
 func _on_trigger_body_exited(body_entered: Node3D):
@@ -61,6 +65,9 @@ func _on_weight_applied_changed(_new_value: float):
 
 
 func _update_state():
+	if not weight_applied:
+		return
+	
 	if weight_applied.current_value > 0:
 		activate()
 	else:
@@ -94,11 +101,11 @@ func deactivate():
 
 func apply_visuals(new_visuals: InteractiveTileVisuals = null):
 	if disabled:
-		new_visuals = InteractiveTileVisuals.new()
+		new_visuals = DEFAULT_VISUALS
 	if not new_visuals is InteractiveTileVisuals:
 		new_visuals = visuals
 	if not new_visuals is InteractiveTileVisuals:
-		new_visuals = InteractiveTileVisuals.new()
+		new_visuals = DEFAULT_VISUALS
 	if not is_node_ready():
 		apply_visuals.call_deferred(new_visuals)
 		return
