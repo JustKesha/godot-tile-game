@@ -19,5 +19,5 @@ func _activated(tile: InteractiveTile):
 		if player:
 			# NOTE Using player's custom apply_impulse would not reset velocity
 			# player.apply_impulse(impulse)
-			player.movement_controller.internal_velocity = impulse
+			player.movement_controller.velocity = impulse
 			continue

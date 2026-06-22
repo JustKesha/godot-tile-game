@@ -27,7 +27,7 @@ func _move():
 
 
 func _apply_velocity():
-	var local_velocity := movement_controller.internal_velocity
+	var local_velocity := movement_controller.velocity
 	
 	if local_velocity.is_zero_approx():
 		stat_velocity.remove_modifier("movement_controller")
@@ -64,4 +64,4 @@ func _on_movement_velocity_changed(_local_velocity: Vector3):
 
 
 func apply_impulse(impulse: Vector3):
-	movement_controller.internal_velocity += impulse
+	movement_controller.velocity += impulse
