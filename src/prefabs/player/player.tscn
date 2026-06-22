@@ -1,0 +1,39 @@
+[gd_scene format=3 uid="uid://dtxasem2n06j3"]
+
+[ext_resource type="Script" uid="uid://c7v2dipnninur" path="res://prefabs/player/player.gd" id="1_sxsrd"]
+[ext_resource type="Script" uid="uid://dqd7f5y86mkmi" path="res://prefabs/player/player_movement.gd" id="2_wv1mm"]
+[ext_resource type="Script" uid="uid://dixg8hjyyhd7v" path="res://prefabs/player/player_camera.gd" id="3_binfn"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_sxsrd"]
+
+[node name="Player" type="CharacterBody3D" unique_id=1883386806]
+collision_layer = 2
+script = ExtResource("1_sxsrd")
+rigid_body_push_force = 1000.0
+
+[node name="Movement" type="Node" parent="." unique_id=18992056 node_paths=PackedStringArray("body")]
+unique_name_in_owner = true
+script = ExtResource("2_wv1mm")
+body = NodePath("..")
+controls_forward = "move_forward"
+controls_backward = "move_backward"
+controls_left = "move_left"
+controls_right = "move_right"
+controls_jump = "jump"
+
+[node name="Tripod" type="Node3D" parent="." unique_id=2114853705 node_paths=PackedStringArray("body", "camera_pivot")]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.5, 0)
+script = ExtResource("3_binfn")
+body = NodePath("..")
+camera_pivot = NodePath(".")
+
+[node name="Camera" type="Camera3D" parent="Tripod" unique_id=998236360]
+unique_name_in_owner = true
+
+[node name="Collider" type="CollisionShape3D" parent="." unique_id=706264946]
+unique_name_in_owner = true
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("CapsuleShape3D_sxsrd")
+
+[connection signal="internal_velocity_changed" from="Movement" to="." method="_on_movement_velocity_changed"]
