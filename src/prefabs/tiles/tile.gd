@@ -49,9 +49,12 @@ func _ready():
 
 
 func _on_trigger_body_entered(body_entered: Node3D):
+	var rigid_body_entered := body_entered as RigidBody3D
+	var weight := 1. if not rigid_body_entered else rigid_body_entered.mass
 	weight_applied.add_modifier(
 		StatModifier.new(
 			str(body_entered.get_instance_id()),
+			weight,
 			)
 	)
 

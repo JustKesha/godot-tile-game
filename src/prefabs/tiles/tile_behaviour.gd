@@ -4,8 +4,8 @@ extends Resource
 
 
 @export_group("Process Delay", "delay")
-@export var delay_activation_sec: float = 1.0
-@export var delay_deactivation_sec: float = 0.5
+@export var delay_activation_sec: float = 0.25
+@export var delay_deactivation_sec: float = 0.0
 
 
 func _activated(_tile: InteractiveTile): pass
