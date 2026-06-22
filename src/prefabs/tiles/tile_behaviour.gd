@@ -3,6 +3,9 @@ class_name InteractiveTileBehaviour
 extends Resource
 
 
+@export_group("Visuals")
+@export var fallback_visuals: InteractiveTileVisuals
+
 @export_group("Process Delay", "delay")
 @export var delay_activation_sec: float = 0.25
 @export var delay_deactivation_sec: float = 0.0

@@ -24,7 +24,10 @@ const DEFAULT_VISUALS: InteractiveTileVisuals = preload("uid://blagnb7plmxp5")
 			if not visuals.changed.is_connected(apply_visuals):
 				visuals.changed.connect(apply_visuals)
 		apply_visuals()
-@export var behaviour: InteractiveTileBehaviour
+@export var behaviour: InteractiveTileBehaviour:
+	set(value):
+		behaviour = value
+		apply_visuals()
 @export var disabled: bool:
 	set(value):
 		disabled = value
@@ -107,6 +110,8 @@ func apply_visuals(new_visuals: InteractiveTileVisuals = null):
 		new_visuals = DEFAULT_VISUALS
 	if not new_visuals is InteractiveTileVisuals:
 		new_visuals = visuals
+	if not new_visuals is InteractiveTileVisuals:
+		new_visuals = behaviour.fallback_visuals
 	if not new_visuals is InteractiveTileVisuals:
 		new_visuals = DEFAULT_VISUALS
 	if not is_node_ready():

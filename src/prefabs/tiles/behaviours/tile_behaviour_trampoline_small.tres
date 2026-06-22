@@ -1,8 +1,10 @@
 [gd_resource type="Resource" script_class="InteractiveTileBehaviourTrampoline" format=3 uid="uid://drrej0ykyhl8p"]
 
 [ext_resource type="Script" uid="uid://cferqn17x8tfh" path="res://prefabs/tiles/behaviours/tile_behaviour_trampoline.gd" id="1_0pmxf"]
+[ext_resource type="Resource" uid="uid://duv00v7l0syun" path="res://prefabs/tiles/visuals/tile_visuals_blue.tres" id="1_qmc11"]
 
 [resource]
 script = ExtResource("1_0pmxf")
 impulse = Vector3(0, 4, 0)
+fallback_visuals = ExtResource("1_qmc11")
 metadata/_custom_type_script = "uid://cferqn17x8tfh"
