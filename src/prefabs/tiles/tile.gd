@@ -110,7 +110,7 @@ func apply_visuals(new_visuals: InteractiveTileVisuals = null):
 		new_visuals = DEFAULT_VISUALS
 	if not new_visuals is InteractiveTileVisuals:
 		new_visuals = visuals
-	if not new_visuals is InteractiveTileVisuals:
+	if not new_visuals is InteractiveTileVisuals and behaviour:
 		new_visuals = behaviour.fallback_visuals
 	if not new_visuals is InteractiveTileVisuals:
 		new_visuals = DEFAULT_VISUALS
